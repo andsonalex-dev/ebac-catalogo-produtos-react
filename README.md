@@ -1,12 +1,47 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Catálogo de Produtos React
 
-Currently, two official plugins are available:
+> Projeto desenvolvido em React + Vite para gerenciamento de um catálogo de produtos, com funcionalidades de carrinho de compras e adição de novos produtos, utilizando persistência no localStorage.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades
 
-## Expanding the ESLint configuration
+- Listagem de produtos com dados mock e produtos adicionados pelo usuário
+- Adição de novos produtos via formulário
+- Adição de produtos ao carrinho de compras
+- Persistência dos dados de produtos e carrinho no localStorage
+- Interface responsiva com styled-components e Bootstrap
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tecnologias Utilizadas
+
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [styled-components](https://styled-components.com/)
+- [Bootstrap 5](https://getbootstrap.com/)
+- [Bootstrap Icons](https://icons.getbootstrap.com/)
+
+## Como rodar o projeto
+
+1. Instale as dependências:
+	```bash
+	npm install
+	```
+2. Inicie o servidor de desenvolvimento:
+	```bash
+	npm run dev
+	```
+3. Acesse `http://localhost:5173` no navegador.
+
+## Estrutura de Pastas
+
+- `src/components` — Componentes reutilizáveis (ProdutoCard, Banner, etc)
+- `src/pages` — Páginas principais (Catálogo, Carrinho, Adicionar Produto)
+- `src/data` — Dados mock iniciais
+- `src/utils` — Utilitários para manipulação do localStorage
+
+## Observações
+
+- Os produtos e o carrinho são salvos no localStorage, garantindo persistência mesmo após recarregar a página.
+- Para limpar o carrinho, utilize o botão disponível na página Carrinho.
+
+---
+Projeto para fins didáticos — EBAC
