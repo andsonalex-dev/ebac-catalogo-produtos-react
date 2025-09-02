@@ -2,8 +2,8 @@
 import PropTypes from 'prop-types';
 import styled from "styled-components";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { addCarrinho } from "../utils/storage";
-
+import { addCarrinho, getCarrinho } from "../utils/storage";
+import { useState, useEffect } from 'react';
 
 const Card = styled.div`
   display: flex;
@@ -42,8 +42,9 @@ const Price = styled.strong`
   color: #0d6efd; /* Azul padrão bootstrap */
 `;
 
+
 const AddCartButton = styled.button`
-  background-color: #198754;
+  background-color: ${props => props.adicionado ? '#6c757d' : '#198754'};
   color: white;
   border: none;
   padding: 5px 10px;
@@ -52,7 +53,7 @@ const AddCartButton = styled.button`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: #125c39ff; 
+    background-color: ${props => props.adicionado ? '#6c757d' : '#166e45ff'};
     transform: scale(1.05);
     color: white;
   }
@@ -62,12 +63,21 @@ const AddCartButton = styled.button`
   }
 `;
 
+const ProdutoCard = ({ nome, preco, descricao, id, ...rest }) => {
+  const [adicionado, setAdicionado] = useState(false);
 
-const ProdutoCard = ({ nome, preco, descricao, ...rest }) => {
+  useEffect(() => {
+    const carrinho = getCarrinho();
+    if (carrinho.some(item => item.id === id)) {
+      setAdicionado(true);
+    }
+  }, [id]);
+
   const handleAddCarrinho = () => {
-    addCarrinho({ nome, preco, descricao, ...rest });
-    alert('Produto adicionado ao carrinho!');
+    addCarrinho({ nome, preco, descricao, id, ...rest });
+    setAdicionado(true);
   };
+
   return (
     <Card>
       <CardBody>
@@ -76,8 +86,13 @@ const ProdutoCard = ({ nome, preco, descricao, ...rest }) => {
       </CardBody>
       <CardFooter>
         <Price>R$ {preco}</Price>
-        <AddCartButton onClick={handleAddCarrinho} title="Adicionar ao carrinho">
-          <i className="bi bi-cart-fill"></i>
+        <AddCartButton
+          onClick={handleAddCarrinho}
+          adicionado={adicionado}
+          title={adicionado ? 'Produto já adicionado' : 'Adicionar ao carrinho'}
+          disabled={adicionado}
+        >
+          {adicionado ? 'Adicionado' : <><i className="bi bi-cart-fill"></i></>}
         </AddCartButton>
       </CardFooter>
     </Card>
